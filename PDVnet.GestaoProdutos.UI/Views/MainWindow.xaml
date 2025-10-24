@@ -1,0 +1,67 @@
+﻿<Window x:Class="PDVnet.GestaoProdutos.UI.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PDVnet.GestaoProdutos.UI.Views"
+        mc:Ignorable="d"
+        Title="Gestão de Produtos - PDVNet"
+        Height="600" Width="900"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Cabeçalho -->
+        <TextBlock Text="Sistema de Gestão de Estoque"
+                   FontSize="22" FontWeight="Bold"
+                   Margin="0 0 0 10"
+                   Foreground="#222"/>
+
+        <!-- DataGrid -->
+        <DataGrid Grid.Row="1"
+                  ItemsSource="{Binding Produtos}"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  SelectedItem="{Binding ProdutoSelecionado}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                <DataGridTextColumn Header="Nome" Binding="{Binding Nome}" Width="*"/>
+                <DataGridTextColumn Header="Preço (R$)" Binding="{Binding Preco, StringFormat={}{0:C2}, ConverterCulture=pt-BR}" Width="100" />
+                <DataGridTextColumn Header="Quantidade" Binding="{Binding Quantidade}" Width="100"/>
+                <DataGridTextColumn Header="Data Cadastro" Binding="{Binding DataCadastro}" Width="150"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Rodapé -->
+        <StackPanel Grid.Row="2" Orientation="Vertical" Margin="0 15 0 0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 5">
+                <Button Content="Novo" Width="100" Margin="5"
+                        Command="{Binding NovoCommand}" />
+                <Button Content="Editar" Width="100" Margin="5"
+                        Command="{Binding EditarCommand}" />
+                <Button Content="Excluir" Width="100" Margin="5"
+                        Command="{Binding ExcluirCommand}" />
+                <Button Content="Atualizar" Width="100" Margin="5"
+                        Command="{Binding AtualizarCommand}" />
+            </StackPanel>
+
+            <!-- Dashboard -->
+            <Border BorderBrush="#DDD" BorderThickness="1" CornerRadius="6" Padding="10" Background="#FFF">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
+                    <TextBlock Text="Total de Produtos: " FontWeight="Bold" Margin="10,0"/>
+                    <TextBlock Text="{Binding TotalProdutos}" Margin="10,0"/>
+                    <TextBlock Text=" | Valor Total do Estoque: " FontWeight="Bold" Margin="10,0"/>
+                    <TextBlock Text="{Binding ValorTotalEstoque, StringFormat='{}{0:C2}', ConverterCulture=pt-BR}" Margin="10,0"/>
+                    <TextBlock Text=" | Produtos com baixo estoque: " FontWeight="Bold" Margin="10,0"/>
+                    <TextBlock Text="{Binding ProdutosBaixoEstoque}" Foreground="Red" Margin="10,0"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Grid>
+</Window>
