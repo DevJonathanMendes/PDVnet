@@ -1,6 +1,6 @@
 # PDVnet - Gestão de Produtos (WPF)
 
-## 🔹 Pré-requisitos
+## Pré-requisitos
 
 - Windows 8.1 ou superior (ou equivalente que suporte WPF).  
 - Visual Studio 2019/2022 com carga de trabalho **Desenvolvimento para Desktop com .NET**. 
@@ -10,9 +10,33 @@
 
 ---
 
-## 🔹 Rodando o projeto
+## Rodando o projeto
 
 1. Clone o repositório:
 
 ```bash
-git clone https://github.com/SEU_USUARIO/PDVnet.git
+git clone https://github.com/DevJonathanMendes/PDVnet.git
+```
+
+(Ou na interface do seu Visual Studio)
+
+No Visual Studio, basta iniciar o projeto.
+
+## Script SQL (Criação, caso queira no SSMS)
+
+```SQL
+CREATE DATABASE PDVnetDB;
+GO
+
+USE PDVnetDB;
+GO
+
+CREATE TABLE Produto (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Nome NVARCHAR(100) NOT NULL,
+    Descricao NVARCHAR(255),
+    Preco DECIMAL(10,2) NOT NULL,
+    Quantidade INT NOT NULL,
+    DataCadastro DATETIME NOT NULL DEFAULT GETDATE()
+);
+```
